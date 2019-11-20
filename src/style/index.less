@@ -1,0 +1,66 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.pageFullScreen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #2d3a4b;
+  width: 100%;
+}
+.login-wrapper {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  .login-form {
+    margin-top: 20px;
+    .login-btn {
+      width: 100%;
+    }
+  }
+}
+
+.main {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  .user {
+    line-height: 60px;
+    color: #fff;
+    font-size: 16px;
+  }
+}
+.el-header {
+  background: #fff;
+  .header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    .collapsed {
+      i {
+        font-size: 30px;
+        cursor: pointer;
+        margin-right: 20px;
+      }
+    }
+  }
+}
+.el-aside {
+  background: #2d3a4b;
+  transition: all 0.2s;
+}
+.content {
+  padding: 20px;
+  background: #EAEAEA;
+}
+.el-pagination {
+  padding: 20px 0;
+  text-align: right;
+}

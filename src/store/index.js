@@ -18,33 +18,37 @@ export default new Vuex.Store({
         path: "/index"
       },
       {
-        name: "操作菜单",
-        path: "/operate",
-        children: [
-          {
-            name: "修改",
-            path: "/operate/change"
-          },
-          {
-            name: "保存",
-            path: "/operate/save"
-          }
-        ]
+        name: "zenmock",
+        path: "/mock"
       },
-      {
-        name: "记录",
-        path: "/operates",
-        children: [
-          {
-            name: "昨日",
-            path: "/operates/changes"
-          },
-          {
-            name: "今日",
-            path: "/operates/saves"
-          }
-        ]
-      }
+      // {
+      //   name: "操作菜单",
+      //   path: "/operate",
+      //   children: [
+      //     {
+      //       name: "修改",
+      //       path: "/operate/change"
+      //     },
+      //     {
+      //       name: "保存",
+      //       path: "/operate/save"
+      //     }
+      //   ]
+      // },
+      // {
+      //   name: "记录",
+      //   path: "/operates",
+      //   children: [
+      //     {
+      //       name: "昨日",
+      //       path: "/operates/changes"
+      //     },
+      //     {
+      //       name: "今日",
+      //       path: "/operates/saves"
+      //     }
+      //   ]
+      // }
     ]
   },
   mutations: mutations,

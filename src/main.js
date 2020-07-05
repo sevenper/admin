@@ -6,9 +6,13 @@ import store from "./store";
 import { matchBrumb } from "./utils/matchRoute";
 import "element-ui/lib/theme-chalk/index.css";
 import "./style/index.less";
+import { axiosHttp } from "./utils/http.js";
+import VueClipboard from "vue-clipboard2";
 
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
+Vue.prototype.$http = new axiosHttp();
+Vue.use(VueClipboard);
 
 router.beforeEach((to, from, next) => {
   store.commit("BREADCRUMBS", {

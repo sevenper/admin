@@ -5,13 +5,6 @@ axios.defaults.timeout = 10000;
 
 axios.interceptors.request.use(
   config => {
-    let user = JSON.parse(localStorage.getItem("user"));
-
-    if (user && user.token) {
-      config.headers.common["token"] = user.token;
-    } else {
-      config.headers.common["token"] = "";
-    }
     return config;
   },
   error => {
@@ -21,24 +14,15 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
-    Vue.prototype.store.commit("LOADING", { loading: false });
     return response;
   },
   error => {
-    Vue.prototype.store.commit("LOADING", { loading: false });
-    let data = error.response.data;
-    if (error.response.status == 401) {
-      Vue.prototype.router.push({
-        name: "login"
-      });
+    if (error.response.status !== 200) {
+      Vue.prototype.$message.error("服务器错误");
     }
-    if (error.response.status == 500) {
-      if (error.response.data.code != "999999") {
-        Vue.prototype.$message.error(data.msg);
-      }
-      if (!error.response.data) {
-        Vue.prototype.message.error("服务器错误");
-      }
+
+    if (error.response.data.code) {
+      Vue.prototype.$message.error(error.response.data.msg);
     }
     return Promise.reject(error);
   }
@@ -50,5 +34,11 @@ export class axiosHttp {
   }
   post(url, params = {}) {
     return axios.post(url, params).then(res => res.data);
+  }
+  delete(url, params = {}) {
+    return axios.delete(url, params).then(res => res.data);
+  }
+  put(url, params = {}) {
+    return axios.put(url, params).then(res => res.data);
   }
 }

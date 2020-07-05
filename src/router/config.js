@@ -20,6 +20,20 @@ const routes = [
         meta: { requiresLogin: true }
       },
       {
+        path: "/mock",
+        name: "mock",
+        component: () => import("../views/Mock"),
+        pathname: "zenmock",
+        meta: { requiresLogin: true }
+      },
+      {
+        path: "/mock/add",
+        name: "mockadd",
+        component: () => import("../views/Mock/Add"),
+        pathname: "mockadd",
+        meta: { requiresLogin: true }
+      },
+      {
         path: "/operate/change",
         name: "index",
         component: () => import("../views/Change"),

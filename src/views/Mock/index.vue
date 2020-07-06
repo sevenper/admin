@@ -123,7 +123,7 @@ export default {
     async loadData(pageNum = 1) {
       const pagin = {
         pageNum: pageNum,
-        pageSize: 1
+        pageSize: 10
       };
       const res = await this.$http.get("/api/mock/query", {
         ...pagin,

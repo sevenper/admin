@@ -29,6 +29,9 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="contains" prop="contains">
+        <el-input type="textarea" v-model="ruleForm.contains"></el-input>
+      </el-form-item>
       <el-form-item label="requestBody" prop="requestBody">
         <el-input type="textarea" v-model="ruleForm.requestBody"></el-input>
       </el-form-item>
@@ -57,6 +60,7 @@ export default {
         project: "",
         uri: "",
         method: "GET",
+        contains: "",
         requestBody: "",
         responseBody: "",
         info: ""
@@ -68,6 +72,9 @@ export default {
         uri: [{ required: true, message: "请输入uri", trigger: "blur" }],
         method: [
           { required: true, message: "请选择method", trigger: "change" }
+        ],
+        contains: [
+          { required: true, message: "请输入contains", trigger: "blur" }
         ],
         requestBody: [
           { required: true, message: "请输入requestBody", trigger: "blur" }

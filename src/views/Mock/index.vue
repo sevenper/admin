@@ -48,34 +48,36 @@
       <el-table-column
         prop="project"
         label="project"
-        width="150"
+        width="120"
         fixed="left"
         show-overflow-tooltip
       >
       </el-table-column>
       <el-table-column prop="uri" label="uri" width="270"></el-table-column>
+      <el-table-column
+        prop="contains"
+        label="contains"
+        width="270"
+      ></el-table-column>
       <el-table-column prop="method" label="method" width="100">
       </el-table-column>
-      <el-table-column label="requestBody" show-overflow-tooltip width="300">
+      <el-table-column label="requestBody" show-overflow-tooltip width="150">
         <template slot-scope="scope">
           <div class="body-item">
-            <div style="width:270px" class="text">
-              {{ scope.row.requestBody }}
-            </div>
+            <el-button type="text" @click="onJsonClick(scope.row.requestBody)">
+              详情
+            </el-button>
             <el-button type="text" v-clipboard:copy="scope.row.requestBody">
               复制
             </el-button>
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="responseBody" show-overflow-tooltip width="300">
+      <el-table-column label="responseBody" show-overflow-tooltip width="150">
         <template slot-scope="scope">
           <div class="body-item">
-            <div style="width:270px" class="text">
-              {{ scope.row.requestBody }}
-            </div>
-            <el-button type="text">
-              查看
+            <el-button type="text" @click="onJsonClick(scope.row.responseBody)">
+              详情
             </el-button>
             <el-button type="text" v-clipboard:copy="scope.row.responseBody">
               复制
@@ -102,11 +104,29 @@
       hide-on-single-page
     >
     </el-pagination>
+
+    <el-drawer
+      :visible.sync="drawer"
+      :withHeader="false"
+      :show-close="false"
+      custom-class="mock-drawer"
+      size="60%"
+      style="overflow:scroll"
+    >
+      <div style="text-align:left">
+        <json-view :data="jsonData" :deep="5" theme="one-dark"></json-view>
+      </div>
+    </el-drawer>
   </div>
 </template>
 <script>
+import jsonView from "vue-json-views";
+
 export default {
   name: "Index",
+  components: {
+    jsonView
+  },
   data() {
     return {
       pageNum: 1,
@@ -116,7 +136,9 @@ export default {
         project: "",
         method: ""
       },
-      urlData: ["GET", "POST", "PUT", "DELETE"]
+      urlData: ["GET", "POST", "PUT", "DELETE"],
+      jsonData: [],
+      drawer: false
     };
   },
   async mounted() {
@@ -144,6 +166,7 @@ export default {
         project: item.project,
         uri: item.uri,
         method: item.method,
+        contains: item.contains,
         requestBody: item.requestBody,
         responseBody: item.responseBody,
         info: item.info
@@ -159,6 +182,13 @@ export default {
       const res = await this.$http.delete(`/api/mock/${id}`);
       this.$message.success("删除成功");
       this.loadData();
+    },
+    onJsonClick(data) {
+      this.drawer = true;
+      this.jsonData = JSON.parse(data);
+    },
+    handleClose() {
+      this.drawer = false;
     }
   }
 };

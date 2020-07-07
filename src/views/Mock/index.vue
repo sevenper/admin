@@ -74,6 +74,9 @@
             <div style="width:270px" class="text">
               {{ scope.row.requestBody }}
             </div>
+            <el-button type="text">
+              查看
+            </el-button>
             <el-button type="text" v-clipboard:copy="scope.row.responseBody">
               复制
             </el-button>
